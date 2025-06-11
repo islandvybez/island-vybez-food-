@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Island Vybez Food - Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <img src="images/logo.png" alt="Island Vybez Logo" style="max-height:100px;" />
+    <h1>Island Vybez Food</h1>
+    <nav>
+
+      <a href="index.html" class="active">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2>Welcome to Island Vybez</h2>
+      <p>We specialize in authentic Jamaican snacks, groceries, and cultural goods. Every item is handpicked fresh from Jamaica the day you order!</p>
+      <img src="images/background.jpg" alt="Island Vybez Banner" style="width:100%; max-height:400px; object-fit:cover;" />
+    </section>
+
+    <section class="gallery">
+      <h2>items</h2>
+      <div class="gallery-grid">
+        <img src="images/chub.jpg" alt="Chubby" />
+        <img src="images/Chippies Banana Chips.jpg" alt="Banana Chips" style="width:200px; height:200px; object-fit:cover;"/>
+        <img src="images/sb.jpg" alt="Irish Moss Drink" style="width:200px; height:200px; object-fit:cover;"/>
+        <img src="images/cheese.jpg" alt="Tastee Cheese" style="width:200px; height:200px; object-fit:cover;"/>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <h2>Customer Reviews</h2>
+      <div class="review">
+        <p>“Always fresh and packed with love. Brings me back to Jamaica every time!”</p>
+        <strong>– Simone, NY</strong>
+      </div>
+      <div class="review">
+        <p>“Best bun and cheese combo I’ve had in the US!”</p>
+        <strong>– Andre, FL</strong>
+      </div>
+    </section>
+
+    <section class="news">
+      <h2>Island Vybez Blog & Updates</h2>
+      <ul>
+        <li><strong>June 2025:</strong> We now ship to Canada! 🇨🇦</li>
+        <li><strong>May 2025:</strong> New snack bundles added to the store!</li>
+      </ul>
+    </section>
+
+    <section class="contact">
+      <h2>Contact Us</h2>
+      <p>Questions? Reach out anytime—we’re happy to help.</p>
+      <form action="mailto:islandvybezfood@gmail.com" method="POST" enctype="text/plain">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" rows="5" required></textarea><br />
+
+        <input type="submit" value="Send Message" />
+      </form>
+    </section>
+  </main>
+
+  <footer>
+<footer style="background:#222; color:#fff; padding:10px; text-align:center;">
+  <p>© 2025 Island Vybez Food. All rights reserved. | 
+    <a href="policy.html" style="color: #4CAF50; text-decoration: underline;">Store Policy</a>
+  </p>
+</footer>
+  </footer>
+
+</body>
+</html>

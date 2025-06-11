@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track My Order - Island Vybez</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .track-container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+    .track-container h2 {
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .order-details {
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="track-container">
+    <h2>Track My Order</h2>
+    <p>Enter your Order ID below to view order details.</p>
+    <input type="text" id="track-input" placeholder="Enter Order ID" />
+    <button onclick="trackOrder()">Track Order</button>
+
+    <div class="order-details" id="order-info">
+      <h3>Order Details</h3>
+      <p><strong>Order ID:</strong> <span id="t-order-id"></span></p>
+      <p><strong>Name:</strong> <span id="t-name"></span></p>
+      <p><strong>Email:</strong> <span id="t-email"></span></p>
+      <p><strong>Items:</strong> <span id="t-items"></span></p>
+      <p><strong>Total:</strong> <span id="t-total"></span></p>
+    </div>
+  </div>
+
+  <script>
+    function trackOrder() {
+      const inputId = document.getElementById("track-input").value.trim();
+      const savedId = localStorage.getItem("orderId");
+
+      if (inputId === savedId) {
+        document.getElementById("t-order-id").textContent = savedId;
+        document.getElementById("t-name").textContent = localStorage.getItem("buyerName") || "N/A";
+        document.getElementById("t-email").textContent = localStorage.getItem("buyerEmail") || "N/A";
+        document.getElementById("t-items").textContent = localStorage.getItem("cartItems") || "N/A";
+        document.getElementById("t-total").textContent = localStorage.getItem("cartTotal") || "N/A";
+        document.getElementById("order-info").style.display = "block";
+      } else {
+        alert("Order not found. Please check the Order ID.");
+        document.getElementById("order-info").style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>

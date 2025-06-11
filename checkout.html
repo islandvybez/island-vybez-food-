@@ -1,0 +1,170 @@
+<!-- checkout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Island Vybez</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="images/logo.png" alt="Island Vybez Logo" style="max-height:80px;" />
+    <h1>Island Vybez Food</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="checkout.html" class="active">Checkout</a>
+    </nav>
+  </header>
+
+  <main style="padding: 20px;">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+
+    <section>
+      <h3>Shipping Information</h3>
+      <form id="shipping-form">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" required />
+        <label for="contact">Contact</label>
+        <input type="text" id="contact" required />
+        <label for="address">Address</label>
+        <input type="text" id="address" required />
+        <label for="city">City</label>
+        <input type="text" id="city" required />
+        <label for="country">Country</label>
+        <input type="text" id="country" required />
+        <label for="zip">Zip Code</label>
+        <input type="text" id="zip" required />
+      </form>
+
+      <div class="total-section">
+        <p>Subtotal: $<span id="total">0.00</span></p>
+        <p>Shipping: $<span id="shipping">0.00</span></p>
+        <p><strong>Total: $<span id="grandtotal">0.00</span></strong></p>
+      </div>
+    </section>
+
+    <div id="paypal-button-container"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Island Vybez Food. All rights reserved. | 
+      <a href="policy.html" style="color: #fff; text-decoration: underline;">Store Policy</a>
+    </p>
+  </footer>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=AaDPAfs6kDABg6743_UsaMcSxLEG4M3uTLfGXU5SIj6yecyYKySxp_Ay8BFm7fBJaEnKPqRq3NnRBxFH&currency=USD"></script>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    function calculateSubtotal() {
+      return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    }
+
+    function getShippingCost(country) {
+      if (!country) return 0;
+      country = country.trim().toLowerCase();
+      return (country === "usa" || country === "united states") ? 0 : 10;
+    }
+
+    function updateShippingAndTotal() {
+      const country = document.getElementById("country")?.value || "";
+      const shippingCost = getShippingCost(country);
+      const subtotal = calculateSubtotal();
+      const grandTotal = subtotal + shippingCost;
+
+      document.getElementById("shipping").textContent = shippingCost.toFixed(2);
+      document.getElementById("grandtotal").textContent = grandTotal.toFixed(2);
+      document.getElementById("total").textContent = subtotal.toFixed(2);
+
+      return grandTotal;
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cart-items");
+      const totalDisplay = document.getElementById("total");
+      container.innerHTML = "";
+
+      if (cart.length === 0) {
+        container.innerHTML = "<p>Your cart is empty.</p>";
+        totalDisplay.textContent = "0.00";
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p><strong>${item.name}</strong> - $${item.price.toFixed(2)} x ${item.quantity} = $${itemTotal.toFixed(2)}
+          <button onclick="removeItem(${index})">Remove</button></p>
+        `;
+        container.appendChild(div);
+      });
+
+      updateShippingAndTotal();
+      renderPayPal();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function renderPayPal() {
+      document.getElementById("paypal-button-container").innerHTML = "";
+
+      paypal.Buttons({
+        createOrder: function (data, actions) {
+          const total = updateShippingAndTotal();
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: total.toFixed(2)
+              }
+            }]
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            const name = details.payer.name.given_name || "Customer";
+            const email = details.payer.email_address || "N/A";
+            const items = cart.map(item => `${item.name} x${item.quantity}`).join(", ");
+            const shipping = parseFloat(document.getElementById("shipping").textContent);
+            const total = calculateSubtotal() + shipping;
+            // SNIPPET #2: Place this inside onApprove
+const orderId = 'IV-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+localStorage.setItem("orderId", orderId);
+window.location.href = `thankyou.html?name=${encodeURIComponent(name)}&orderId=${orderId}`;
+
+
+            // Save shipping form data
+            localStorage.setItem("orderContact", document.getElementById("contact").value);
+            localStorage.setItem("orderAddress", document.getElementById("address").value);
+            localStorage.setItem("orderCity", document.getElementById("city").value);
+            localStorage.setItem("orderCountry", document.getElementById("country").value);
+            localStorage.setItem("orderZip", document.getElementById("zip").value);
+
+            localStorage.setItem("cartItems", items);
+            localStorage.setItem("cartTotal", `$${total.toFixed(2)}`);
+            localStorage.setItem("buyerName", name);
+            localStorage.setItem("buyerEmail", email);
+
+            localStorage.removeItem("cart");
+
+            window.location.href = "thankyou.html?name=" + encodeURIComponent(name);
+          });
+        }
+      }).render("#paypal-button-container");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("country")?.addEventListener("input", updateShippingAndTotal);
+      renderCart();
+    });
+  </script>
+</body>
+</html>

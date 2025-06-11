@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receipt - Island Vybez</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .receipt-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .receipt-container h2 {
+      text-align: center;
+    }
+    .print-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    @media print {
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="receipt-container">
+    <h2>Island Vybez Food - Order Receipt</h2>
+    <p><strong>Order ID:</strong> <span id="receipt-order-id">N/A</span></p>
+    <p><strong>Customer Name:</strong> <span id="receipt-name">N/A</span></p>
+    <p><strong>Email:</strong> <span id="receipt-email">N/A</span></p>
+    <p><strong>Contact:</strong> <span id="receipt-contact">N/A</span></p>
+    
+    <h3>Shipping Address</h3>
+    <p id="receipt-address">N/A</p>
+    <p><strong>City:</strong> <span id="receipt-city">N/A</span></p>
+    <p><strong>Country:</strong> <span id="receipt-country">N/A</span></p>
+    <p><strong>Zip Code:</strong> <span id="receipt-zip">N/A</span></p>
+
+    <h3>Order Summary</h3>
+    <p><strong>Items:</strong> <span id="receipt-items">N/A</span></p>
+    <p><strong>Total:</strong> <span id="receipt-total">N/A</span></p>
+
+    <button class="print-btn" onclick="window.print()">Print Receipt</button>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get("orderId") || localStorage.getItem("orderId") || "N/A";
+
+    document.getElementById("receipt-order-id").textContent = orderId;
+    document.getElementById("receipt-name").textContent = localStorage.getItem("buyerName") || "N/A";
+    document.getElementById("receipt-email").textContent = localStorage.getItem("buyerEmail") || "N/A";
+    document.getElementById("receipt-contact").textContent = localStorage.getItem("orderContact") || "N/A";
+    document.getElementById("receipt-address").textContent = localStorage.getItem("orderAddress") || "N/A";
+    document.getElementById("receipt-city").textContent = localStorage.getItem("orderCity") || "N/A";
+    document.getElementById("receipt-country").textContent = localStorage.getItem("orderCountry") || "N/A";
+    document.getElementById("receipt-zip").textContent = localStorage.getItem("orderZip") || "N/A";
+    document.getElementById("receipt-items").textContent = localStorage.getItem("cartItems") || "N/A";
+    document.getElementById("receipt-total").textContent = localStorage.getItem("cartTotal") || "N/A";
+  </script>
+
+</body>
+</html>

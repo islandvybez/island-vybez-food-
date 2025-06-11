@@ -1,0 +1,103 @@
+<!-- thankyou.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You - Island Vybez</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <img src="images/logo.png" alt="Island Vybez Logo" style="max-height:80px;" />
+    <h1>Island Vybez Food</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+
+  <main style="padding: 20px;">
+    <h2>Thank You, <span id="customer-name">Customer</span>!</h2>
+    <p>Your order has been placed successfully.</p>
+
+    <h3>Order Summary</h3>
+    <p><strong>Items:</strong> <span id="order-items"></span></p>
+    <p><strong>Total:</strong> <span id="order-total"></span></p>
+
+    <h3>Shipping Information</h3>
+    <p><strong>Contact:</strong> <span id="order-contact"></span></p>
+    <p><strong>Address:</strong> <span id="order-address"></span></p>
+    <p><strong>City:</strong> <span id="order-city"></span></p>
+    <p><strong>Country:</strong> <span id="order-country"></span></p>
+    <p><strong>Zip Code:</strong> <span id="order-zip"></span></p>
+
+    <!-- Optional: Display order ID if needed -->
+    <p><strong>Order ID:</strong> <span id="order-id">N/A</span></p>
+  </main>
+
+  <footer>
+    <p>© 2025 Island Vybez Food. All rights reserved. | 
+      <a href="policy.html" style="color: #fff; text-decoration: underline;">Store Policy</a>
+    </p>
+  </footer>
+
+  <script>
+    emailjs.init("jyJOWCmacdnF6pFvO");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = decodeURIComponent(urlParams.get("name") || localStorage.getItem("buyerName") || "Customer");
+    const orderId = urlParams.get("orderId") || localStorage.getItem("orderId") || "N/A";
+    const contact = localStorage.getItem("orderContact") || "N/A";
+    const address = localStorage.getItem("orderAddress") || "N/A";
+    const city = localStorage.getItem("orderCity") || "N/A";
+    const country = localStorage.getItem("orderCountry") || "N/A";
+    const zip = localStorage.getItem("orderZip") || "N/A";
+    const items = localStorage.getItem("cartItems") || "N/A";
+    const total = localStorage.getItem("cartTotal") || "N/A";
+    const email = localStorage.getItem("buyerEmail") || "N/A";
+
+    document.getElementById("customer-name").textContent = name;
+    document.getElementById("order-id").textContent = orderId;
+    document.getElementById("order-items").innerHTML = items;
+    document.getElementById("order-total").textContent = total;
+    document.getElementById("order-contact").textContent = contact;
+    document.getElementById("order-address").textContent = address;
+    document.getElementById("order-city").textContent = city;
+    document.getElementById("order-country").textContent = country;
+    document.getElementById("order-zip").textContent = zip;
+
+    emailjs.send("service_juzepk3", "template_iatxdm9", {
+      user_name: name,
+      user_email: email,
+      user_contact: contact,
+      user_address: address,
+      user_city: city,
+      user_country: country,
+      user_zip: zip,
+      order_items: items,
+      order_total: total.replace("$", ""),
+      order_id: orderId
+    }).then(function(response) {
+      console.log("Email sent:", response.status, response.text);
+    }, function(error) {
+      console.error("Email error:", error);
+    });
+
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("cartTotal");
+    localStorage.removeItem("orderContact");
+    localStorage.removeItem("orderAddress");
+    localStorage.removeItem("orderCity");
+    localStorage.removeItem("orderCountry");
+    localStorage.removeItem("orderZip");
+    localStorage.removeItem("buyerEmail");
+    localStorage.removeItem("buyerName");
+    localStorage.removeItem("orderId");
+  </script>
+
+</body>
+</html>
