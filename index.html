@@ -132,5 +132,33 @@
     }
   };
 </script>
+  <!-- EmailJS Contact Script -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("jyJOWCmacdnF6pFvO");
+  })();
 
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.send("default_service", "template_contact", {
+      from_name: document.getElementById("name").value,
+      reply_to: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+    }).then(
+      function(response) {
+        alert("Message sent successfully!");
+        document.getElementById("contact-form").reset();
+      },
+      function(error) {
+        alert("Failed to send message. Please try again.");
+      }
+    );
+  });
+</script>
+
+</body>
+
+</body>
 </html>
