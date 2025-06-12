@@ -58,6 +58,22 @@
         <strong>– Andre, FL</strong>
       </div>
     </section>
+<section class="leave-review">
+  <h2>Leave a Review</h2>
+  <form id="review-form">
+    <label for="reviewer-name">Name:</label><br />
+    <input type="text" id="reviewer-name" name="reviewer-name" required /><br />
+
+    <label for="review-text">Review:</label><br />
+    <textarea id="review-text" name="review-text" rows="4" required></textarea><br />
+
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <div id="reviews-list" style="margin-top: 20px;">
+    <!-- New reviews will appear here -->
+  </div>
+</section>
 
     <section class="news">
       <h2>Island Vybez Blog & Updates</h2>
@@ -150,6 +166,54 @@
     <img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Secure" style="height: 24px;" />
   </div>
 </section>
+<script>
+  const reviewForm = document.getElementById('review-form');
+  const reviewsList = document.getElementById('reviews-list');
+
+  // Load reviews from localStorage or empty array
+  let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+  // Function to display reviews on the page
+  function displayReviews() {
+    reviewsList.innerHTML = '';
+    if (reviews.length === 0) {
+      reviewsList.innerHTML = '<p>No reviews yet. Be the first to leave one!</p>';
+      return;
+    }
+
+    reviews.forEach((review) => {
+      const div = document.createElement('div');
+      div.style.border = '1px solid #ccc';
+      div.style.padding = '10px';
+      div.style.marginBottom = '10px';
+      div.innerHTML = `<strong>${review.name}</strong><p>${review.text}</p>`;
+      reviewsList.appendChild(div);
+    });
+  }
+
+  // Show existing reviews on page load
+  displayReviews();
+
+  // Handle new review submission
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('reviewer-name').value.trim();
+    const text = document.getElementById('review-text').value.trim();
+
+    if (name && text) {
+      const newReview = { name, text };
+      reviews.push(newReview);
+
+      // Save updated reviews array to localStorage
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+
+      // Update display and reset form
+      displayReviews();
+      reviewForm.reset();
+    }
+  });
+</script>
 
 
 </body>
