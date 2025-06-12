@@ -1,0 +1,59 @@
+<!-- beauty.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beauty Products - Island Vybez</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <img src="images/logo.png" alt="Island Vybez Logo" style="max-height:80px;" />
+    <h1>Island Vybez Food & Beauty</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop All</a>
+      <a href="beauty.html">Beauty</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+
+  <main style="padding: 20px;">
+    <h2>Beauty Products</h2>
+    <div class="product-list">
+
+      <div class="product-card">
+        <img src="images/facecream.jpg" alt="Herbal Face Cream" style="max-width: 150px;" />
+        <h3>Herbal Face Cream</h3>
+        <p>$10.00</p>
+        <label>Qty:
+          <input type="number" value="1" min="1" id="qty-facecream">
+        </label>
+        <button onclick="addToCart('Herbal Face Cream', 10.00, 'qty-facecream')">Add to Cart</button>
+      </div>
+
+      <!-- Add more beauty items below as needed -->
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Island Vybez. All rights reserved. | 
+      <a href="policy.html" style="color: #fff; text-decoration: underline;">Store Policy</a>
+    </p>
+  </footer>
+
+  <script>
+    function addToCart(name, price, qtyId) {
+      const qty = parseInt(document.getElementById(qtyId).value) || 1;
+      const items = JSON.parse(localStorage.getItem("cart") || "[]");
+      items.push({ name, price, qty });
+      localStorage.setItem("cart", JSON.stringify(items));
+      alert(`${qty} x ${name} added to cart!`);
+    }
+  </script>
+
+</body>
+</html>
