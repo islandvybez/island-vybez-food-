@@ -105,4 +105,34 @@
 </div>
 
 </body>
+  <!-- Cookie Consent -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: #fff; padding: 15px; display: none; z-index: 9999;">
+  <p style="margin: 0; font-size: 14px;">
+    We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. 
+    <a href="privacy.html" style="color: #0bf; text-decoration: underline;">Learn more</a>
+  </p>
+  <div style="margin-top: 10px;">
+    <button onclick="acceptCookies()" style="padding: 6px 12px; margin-right: 10px;">Accept</button>
+    <button onclick="denyCookies()" style="padding: 6px 12px;">Deny</button>
+  </div>
+</div>
+
+<script>
+  function acceptCookies() {
+    localStorage.setItem("cookieConsent", "accepted");
+    document.getElementById("cookie-banner").style.display = "none";
+  }
+
+  function denyCookies() {
+    localStorage.setItem("cookieConsent", "denied");
+    document.getElementById("cookie-banner").style.display = "none";
+  }
+
+  window.onload = function() {
+    if (!localStorage.getItem("cookieConsent")) {
+      document.getElementById("cookie-banner").style.display = "block";
+    }
+  };
+</script>
+
 </html>
