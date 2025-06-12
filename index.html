@@ -66,23 +66,24 @@
         <li><strong>May 2025:</strong> New snack bundles added to the store!</li>
       </ul>
     </section>
+<section class="contact">
+  <h2>Contact Us</h2>
+  <p>Questions? Reach out anytime—we’re happy to help.</p>
+  <form id="contact-form">
+    <label for="from_name">Name:</label><br />
+    <input type="text" id="from_name" name="from_name" autocomplete="name" required /><br />
 
-    <section class="contact">
-      <h2>Contact Us</h2>
-      <p>Questions? Reach out anytime—we’re happy to help.</p>
-      <form id="contact-form">
-        <label for="name">Name:</label><br />
-        <input type="text" id="name" name="from_name" required autocomplete="name" /><br />
+    <label for="reply_to">Email:</label><br />
+    <input type="email" id="reply_to" name="reply_to" autocomplete="email" required /><br />
 
-        <label for="email">Email:</label><br />
-        <input type="email" id="email" name="reply_to" required autocomplete="email" /><br />
+    <label for="message">Message:</label><br />
+    <textarea id="message" name="message" rows="5" required></textarea><br />
 
-        <label for="message">Message:</label><br />
-        <textarea id="message" name="message" rows="5" required autocomplete="off"></textarea><br />
+    <input type="submit" value="Send Message" />
+  </form>
+  <p id="form-status" style="color: green; margin-top: 10px;"></p>
+</section>
 
-        <input type="submit" value="Send Message" />
-      </form>
-    </section>
   </main>
 
   <footer>
@@ -116,38 +117,28 @@
       <button onclick="denyCookies()" style="padding: 6px 12px;">Deny</button>
     </div>
   </div>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function () {
+    emailjs.init("jyJOWCmacdnF6pFvO"); // your actual public key
+  })();
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    emailjs.init("jyJOWCmacdnF6pFvO"); // template_afa89jk
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      emailjs.sendForm('default_service', 'template_contact', this)
-        .then(function() {
-          alert("Message sent successfully!");
-        }, function(error) {
-          alert("Failed to send message: " + JSON.stringify(error));
-        });
-    });
-
-    function acceptCookies() {
-      localStorage.setItem("cookieConsent", "accepted");
-      document.getElementById("cookie-banner").style.display = "none";
-    }
-
-    function denyCookies() {
-      localStorage.setItem("cookieConsent", "denied");
-      document.getElementById("cookie-banner").style.display = "none";
-    }
-
-    window.onload = function() {
-      if (!localStorage.getItem("cookieConsent")) {
-        document.getElementById("cookie-banner").style.display = "block";
+    emailjs.sendForm("default_service", "template_contact", this).then(
+      function () {
+        document.getElementById("form-status").textContent = "✅ Message sent successfully!";
+      },
+      function (error) {
+        document.getElementById("form-status").textContent =
+          "❌ Failed to send message: " + JSON.stringify(error);
+        console.error("EmailJS Error:", error);
       }
-    };
-  </script>
+    );
+  });
+</script>
+
 
 </body>
 </html>
