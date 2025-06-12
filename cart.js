@@ -64,3 +64,8 @@ function renderCart() {
 }
 
 document.addEventListener("DOMContentLoaded", renderCart);
+emailjs.send("default_service", "template_afa89jk", {
+  from_name: document.getElementById("name").value,
+  reply_to: document.getElementById("email").value,
+  message: document.getElementById("message").value,
+});
