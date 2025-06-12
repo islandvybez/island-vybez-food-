@@ -254,3 +254,56 @@ footer {
 .add-to-cart:hover {
   background-color: #e67300;
 }
+/* Responsive Layout Improvements */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+.gallery-grid img {
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Responsive Contact Form */
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Buttons */
+form input[type="submit"],
+#cookie-banner button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  header, nav, .welcome, .contact, .reviews, .news {
+    padding: 10px;
+    text-align: center;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 5px 10px;
+  }
+}
