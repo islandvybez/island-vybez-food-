@@ -1,59 +1,100 @@
-<!-- beauty.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Beauty Products - Island Vybez</title>
+  <title>Beauty & Face Creams | Island Vybez</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <header>
-    <img src="images/logo.png" alt="Island Vybez Logo" style="max-height:80px;" />
-    <h1>Island Vybez Food & Beauty</h1>
+    <a href="index.html"><img src="images/logo.png" alt="Island Vybez Logo" style="max-height: 100px;"></a>
+    <h1>Beauty & Face Creams</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="products.html">Shop All</a>
-      <a href="beauty.html">Beauty</a>
+      <a href="products.html">Shop</a>
       <a href="checkout.html">Checkout</a>
     </nav>
   </header>
 
-  <main style="padding: 20px;">
-    <h2>Beauty Products</h2>
-    <div class="product-list">
-
-      <div class="product-card">
-        <img src="images/facecream.jpg" alt="Herbal Face Cream" style="max-width: 150px;" />
-        <h3>Herbal Face Cream</h3>
-        <p>$10.00</p>
-        <label>Qty:
-          <input type="number" value="1" min="1" id="qty-facecream">
-        </label>
-        <button onclick="addToCart('Herbal Face Cream', 10.00, 'qty-facecream')">Add to Cart</button>
+  <main>
+    <section class="product-grid">
+      <!-- Example Item -->
+      <div class="item">
+        <img src="images/cwhittr.jpg" alt="Caro White Light Cream" />
+        <h3>Caro White Light Cream</h3>
+        <p>Hydrating cream infused with natural carrot oil. Great for skin radiance and even tone.</p>
+        <strong>$18.10</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-1">
+        <button onclick="addToCart('Caro White Light Cream', 18.10, document.getElementById('qty-1').value)">Add to Cart</button>
       </div>
 
-      <!-- Add more beauty items below as needed -->
+      <div class="item">
+        <img src="images/csoap.jpg" alt="Carrot Soap Bar" />
+        <h3>Carrot Soap Bar</h3>
+        <p>Gentle exfoliating bar with a brightening blend of carrot and shea.</p>
+        <strong>$13.50</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-2">
+        <button onclick="addToCart('Carrot Soap Bar', 13.50, document.getElementById('qty-2').value)">Add to Cart</button>
+      </div>
+      <div class="item">
+  <img src="images/lotion.jpg" alt="Carotone Brightening Body Lotion 550 ml" />
+  <h3>Carotone Brightening Body Lotion 550 ml</h3>
+  <p>
+    This lightweight, fast‑absorbing lotion is enriched with B‑Carotene & collagen to help lighten, tone, and brighten skin.
+    Offers UV protection and helps reduce dark spots and uneven tone.
+  </p>
+  <strong>$20.19</strong><br>
+  Quantity: <input type="number" min="1" value="1" id="qty-carotone-550">
+  <button onclick="addToCart('Carotone Brightening Body Lotion 550 ml', 20.19, document.getElementById('qty-carotone-550').value)">Add to Cart</button>
+</div>
+<div class="item">
+  <img src="images/soap.jpg" alt="Carotone Brightening Soap 190 g" />
+  <h3>Carotone Brightening Soap 190 g</h3>
+  <p>Clarifying collagen‑rich soap that deeply cleanses, purifies pores, moisturises and helps reduce sebum.</p>
+  <strong>$13.20</strong><br>
+  Quantity: <input type="number" min="1" value="1" id="qty-carotone-soap">
+  <button onclick="addToCart('Carotone Brightening Soap 190 g', 13.20, document.getElementById('qty-carotone-soap').value)">Add to Cart</button>
+</div>
+<div class="item">
+  <img src="images/carocream.jpg" alt="Carotone Brightening Cream 300 ml" />
+  <h3>Carotone Brightening Cream 300 ml</h3>
+  <p>Original brightening cream to enhance natural glow and improve skin tone.</p>
+  <strong>$20.00</strong><br>
+  Quantity: <input type="number" min="1" value="1" id="qty-carotone-cream">
+  <button onclick="addToCart('Carotone Brightening Cream 300 ml', 20.00, document.getElementById('qty-carotone-cream').value)">Add to Cart</button>
+</div>
+<div class="item">
+  <img src="images/serum.jpg" alt="Carotone Brightening Serum 30 ml" />
+  <h3>Carotone Brightening Serum 30 ml</h3>
+  <p>Serum that gradually lightens freckles and dark spots caused by age, sun or pregnancy.</p>
+  <strong>$16.99</strong><br>
+  Quantity: <input type="number" min="1" value="1" id="qty-carotone-serum">
+  <button onclick="addToCart('Carotone Brightening Serum 30 ml', 16.99, document.getElementById('qty-carotone-serum').value)">Add to Cart</button>
+</div>
 
-    </div>
+
+      <!-- Add more items as needed -->
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 Island Vybez. All rights reserved. | 
-      <a href="policy.html" style="color: #fff; text-decoration: underline;">Store Policy</a>
-    </p>
+    <p>&copy; 2025 Island Vybez Food. All rights reserved.</p>
   </footer>
 
   <script>
-    function addToCart(name, price, qtyId) {
-      const qty = parseInt(document.getElementById(qtyId).value) || 1;
-      const items = JSON.parse(localStorage.getItem("cart") || "[]");
-      items.push({ name, price, qty });
-      localStorage.setItem("cart", JSON.stringify(items));
-      alert(`${qty} x ${name} added to cart!`);
+    function addToCart(name, price, quantity) {
+      let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.quantity += parseInt(quantity);
+      } else {
+        cart.push({ name, price, quantity: parseInt(quantity) });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${quantity} ${name}(s) added to cart!`);
     }
   </script>
-
 </body>
 </html>
