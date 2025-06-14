@@ -20,9 +20,9 @@
 
   <main>
     <section class="product-grid">
-      <!-- Example Item -->
+
       <div class="item">
-        <img src="images/cwhittr.jpg" alt="Caro White Light Cream" />
+        <img src="images/cwhittr.jpg" alt="Caro White Light Cream" style="width:150px; height:auto;" />
         <h3>Caro White Light Cream</h3>
         <p>Hydrating cream infused with natural carrot oil. Great for skin radiance and even tone.</p>
         <strong>$18.10</strong><br>
@@ -31,51 +31,104 @@
       </div>
 
       <div class="item">
-        <img src="images/csoap.jpg" alt="Carrot Soap Bar" />
+        <img src="images/csoap.jpg" alt="Carrot Soap Bar" style="width:150px; height:auto;" />
         <h3>Carrot Soap Bar</h3>
         <p>Gentle exfoliating bar with a brightening blend of carrot and shea.</p>
         <strong>$13.50</strong><br>
         Quantity: <input type="number" min="1" value="1" id="qty-2">
         <button onclick="addToCart('Carrot Soap Bar', 13.50, document.getElementById('qty-2').value)">Add to Cart</button>
       </div>
+
       <div class="item">
-  <img src="images/lotion.jpg" alt="Carotone Brightening Body Lotion 550 ml" />
-  <h3>Carotone Brightening Body Lotion 550 ml</h3>
-  <p>
-    This lightweight, fast‑absorbing lotion is enriched with B‑Carotene & collagen to help lighten, tone, and brighten skin.
-    Offers UV protection and helps reduce dark spots and uneven tone.
-  </p>
-  <strong>$20.19</strong><br>
-  Quantity: <input type="number" min="1" value="1" id="qty-carotone-550">
-  <button onclick="addToCart('Carotone Brightening Body Lotion 550 ml', 20.19, document.getElementById('qty-carotone-550').value)">Add to Cart</button>
-</div>
-<div class="item">
-  <img src="images/soap.jpg" alt="Carotone Brightening Soap 190 g" />
-  <h3>Carotone Brightening Soap 190 g</h3>
-  <p>Clarifying collagen‑rich soap that deeply cleanses, purifies pores, moisturises and helps reduce sebum.</p>
-  <strong>$13.20</strong><br>
-  Quantity: <input type="number" min="1" value="1" id="qty-carotone-soap">
-  <button onclick="addToCart('Carotone Brightening Soap 190 g', 13.20, document.getElementById('qty-carotone-soap').value)">Add to Cart</button>
-</div>
-<div class="item">
-  <img src="images/carocream.jpg" alt="Carotone Brightening Cream 300 ml" />
-  <h3>Carotone Brightening Cream 300 ml</h3>
-  <p>Original brightening cream to enhance natural glow and improve skin tone.</p>
-  <strong>$20.00</strong><br>
-  Quantity: <input type="number" min="1" value="1" id="qty-carotone-cream">
-  <button onclick="addToCart('Carotone Brightening Cream 300 ml', 20.00, document.getElementById('qty-carotone-cream').value)">Add to Cart</button>
-</div>
-<div class="item">
-  <img src="images/serum.jpg" alt="Carotone Brightening Serum 30 ml" />
-  <h3>Carotone Brightening Serum 30 ml</h3>
-  <p>Serum that gradually lightens freckles and dark spots caused by age, sun or pregnancy.</p>
-  <strong>$16.99</strong><br>
-  Quantity: <input type="number" min="1" value="1" id="qty-carotone-serum">
-  <button onclick="addToCart('Carotone Brightening Serum 30 ml', 16.99, document.getElementById('qty-carotone-serum').value)">Add to Cart</button>
-</div>
+        <img src="images/lotion.jpg" alt="Carotone Brightening Body Lotion 550 ml" style="width:150px; height:auto;" />
+        <h3>Carotone Brightening Body Lotion 550 ml</h3>
+        <p>This lightweight, fast‑absorbing lotion is enriched with B‑Carotene & collagen to help lighten, tone, and brighten skin. Offers UV protection and helps reduce dark spots and uneven tone.</p>
+        <strong>$20.19</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-carotone-550">
+        <button onclick="addToCart('Carotone Brightening Body Lotion 550 ml', 20.19, document.getElementById('qty-carotone-550').value)">Add to Cart</button>
+      </div>
 
+      <div class="item">
+        <img src="images/soap.jpg" alt="Carotone Brightening Soap 190 g" style="width:150px; height:auto;" />
+        <h3>Carotone Brightening Soap 190 g</h3>
+        <p>Clarifying collagen‑rich soap that deeply cleanses, purifies pores, moisturises and helps reduce sebum.</p>
+        <strong>$13.20</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-carotone-soap">
+        <button onclick="addToCart('Carotone Brightening Soap 190 g', 13.20, document.getElementById('qty-carotone-soap').value)">Add to Cart</button>
+      </div>
 
-      <!-- Add more items as needed -->
+      <div class="item">
+        <img src="images/carocream.jpg" alt="Carotone Brightening Cream 300 ml" style="width:150px; height:auto;" />
+        <h3>Carotone Brightening Cream 300 ml</h3>
+        <p>Original brightening cream to enhance natural glow and improve skin tone.</p>
+        <strong>$20.00</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-carotone-cream">
+        <button onclick="addToCart('Carotone Brightening Cream 300 ml', 20.00, document.getElementById('qty-carotone-cream').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/serum.jpg" alt="Carotone Brightening Serum 30 ml" style="width:150px; height:auto;" />
+        <h3>Carotone Brightening Serum 30 ml</h3>
+        <p>Serum that gradually lightens freckles and dark spots caused by age, sun or pregnancy.</p>
+        <strong>$16.99</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-carotone-serum">
+        <button onclick="addToCart('Carotone Brightening Serum 30 ml', 16.99, document.getElementById('qty-carotone-serum').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/ctl.jpg" alt="CT+ Clear Therapy Extra Lightening Lotion 250 ml" style="width:150px; height:auto;" />
+        <h3>CT+ Clear Therapy Extra Lightening Lotion 250 ml</h3>
+        <p>Same powerful lightening milk formula in a handy travel size—targets pigmentation and evens tone within 10 days.</p>
+        <strong>$17.00</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-ct-lotion-250">
+        <button onclick="addToCart('CT+ Clear Therapy Extra Lightening Lotion 250 ml', 17.00, document.getElementById('qty-ct-lotion-250').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/ctsoap.jpg" alt="CT+ Clear Therapy Extra Lightening Soap 175 g" style="width:150px; height:auto;" />
+        <h3>CT+ Clear Therapy Extra Lightening Soap 175 g</h3>
+        <p>A fruit-acid enriched soap bar with carrot oil that cleanses deeply, reduces pigmentation, and brightens the skin.</p>
+        <strong>$15.20</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-ct-soap-175">
+        <button onclick="addToCart('CT+ Clear Therapy Extra Lightening Soap 175 g', 15.20, document.getElementById('qty-ct-soap-175').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/idole.jpg" alt="Idole Intense Beauty Lotion – 8.5 oz" style="width:150px; height:auto;" />
+        <h3>Idole Intense Beauty Lotion – 8.5 oz</h3>
+        <p>Enriched with avocado oil and vitamin E, this lotion is specially formulated for delicate skin.<br>Helps protect against blemishes and delivers an even, radiant complexion.</p>
+        <strong>$15.00</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-idole-4pack">
+        <button onclick="addToCart('Idole Intense Beauty Lotion – 8.5 oz ', 15.00, document.getElementById('qty-idole-4pack').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/bio.jpg" alt="Bio Claire Cream Jar 320 ml" style="width:150px; height:auto;" />
+        <h3>Bio Claire Cream Jar 320 ml</h3>
+        <p>Clarifying body cream with a bio-vegetal activator—brightens evenly and moisturizes deeply.</p>
+        <strong>$18.19</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-bc-cream-300">
+        <button onclick="addToCart('Bio Claire Cream Jar 300 ml', 18.19, document.getElementById('qty-bc-cream-300').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/bios.jpg" alt="Bio Claire Soap" style="width:150px; height:auto;" />
+        <h3>Bio Claire Soap</h3>
+        <p>Clarifying brightening soap bar—cleanses deeply and fades blemishes for a brighter complexion.</p>
+        <strong>$11.19</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-bc-soap">
+        <button onclick="addToCart('Bio Claire Soap', 11.19, document.getElementById('qty-bc-soap').value)">Add to Cart</button>
+      </div>
+
+      <div class="item">
+        <img src="images/boil.jpg" alt="Bio Claire Body Oil 200 ml" style="width:150px; height:auto;" />
+        <h3>Bio Claire Body Oil 200 ml</h3>
+        <p>Lightens skin gently using a natural, bio-vegetal blend—helps fade dark spots and hydrate skin.</p>
+        <strong>$20.09</strong><br>
+        Quantity: <input type="number" min="1" value="1" id="qty-bc-oil-200">
+        <button onclick="addToCart('Bio Claire Body Oil 200 ml', 20.09, document.getElementById('qty-bc-oil-200').value)">Add to Cart</button>
+      </div>
+
     </section>
   </main>
 
