@@ -15,6 +15,25 @@
       <a href="index.html">Home</a>
       <a href="products.html">Shop</a>
       <a href="checkout.html">Checkout</a>
+      <a href="cart.html" id="cart-icon" style="position:relative; display:inline-block; text-decoration:none; color:#000;">
+  🛒
+  <span id="cart-count" style="
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    ">
+    0
+  </span>
+</a>
+
     </nav>
   </header>
 
@@ -135,24 +154,26 @@
   <footer>
     <p>&copy; 2025 Island Vybez Food. All rights reserved.</p>
   </footer>
-<div class="trusted-badges" style="display:flex; justify-content:center; gap:40px; align-items:center; padding:20px 0; border-top:1px solid #eee; border-bottom:1px solid #eee;">
 
-  <div style="text-align:center;">
-    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="PayPal Verified" style="height:30px; display:block; margin:0 auto 5px;" />
-    <small>PayPal Verified</small>
+  <div class="trusted-badges" style="display:flex; justify-content:center; gap:40px; align-items:center; padding:20px 0; border-top:1px solid #eee; border-bottom:1px solid #eee;">
+
+    <div style="text-align:center;">
+      <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="PayPal Verified" style="height:30px; display:block; margin:0 auto 5px;" />
+      <small>PayPal Verified</small>
+    </div>
+
+    <div style="text-align:center;">
+      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Secure Payment" style="height:30px; display:block; margin:0 auto 5px;" />
+      <small>SSL Secure</small>
+    </div>
+
+    <div style="text-align:center;">
+      <img src="https://cdn-icons-png.flaticon.com/512/3079/3079188.png" alt="Money Back Guarantee" style="height:30px; display:block; margin:0 auto 5px;" />
+      <small>Money Back Guarantee</small>
+      
+    </div>
+
   </div>
-
-  <div style="text-align:center;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Secure Payment" style="height:30px; display:block; margin:0 auto 5px;" />
-    <small>SSL Secure</small>
-  </div>
-
-  <div style="text-align:center;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3079/3079188.png" alt="Money Back Guarantee" style="height:30px; display:block; margin:0 auto 5px;" />
-    <small>Money Back Guarantee</small>
-  </div>
-
-</div>
 
   <script>
     function addToCart(name, price, quantity) {
@@ -166,6 +187,18 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       alert(`${quantity} ${name}(s) added to cart!`);
     }
+    function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  // Sum all quantities in cart
+  const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+  document.getElementById('cart-count').textContent = count;
+}
+
+// Run once on page load
+updateCartCount();
+
+// If you want, call updateCartCount() at the end of your addToCart function, for instant update
+
   </script>
 </body>
 </html>
