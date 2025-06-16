@@ -27,6 +27,25 @@
       <a href="index.html" class="active">Home</a>
       <a href="products.html">Shop</a>
       <a href="checkout.html">Checkout</a>
+      <a href="cart.html" id="cart-icon" style="position:relative; display:inline-block; text-decoration:none; color:#000;">
+  🛒
+  <span id="cart-count" style="
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    ">
+    0
+  </span>
+</a>
+
 
     </nav>
   </header>
@@ -190,6 +209,18 @@
         console.error("EmailJS Error:", error);
       });
   });
+  function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  // Sum all quantities in cart
+  const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+  document.getElementById('cart-count').textContent = count;
+}
+
+// Run once on page load
+updateCartCount();
+
+// If you want, call updateCartCount() at the end of your addToCart function, for instant update
+
 </script>
 
 </body>
