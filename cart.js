@@ -1,16 +1,4 @@
-function addToCart(product) {
-  const { id, name, price } = product;
-
-  if (cart[id]) {
-    cart[id].quantity += 1;
-  } else {
-    cart[id] = { id, name, price, quantity: 1 };
-  }
-
-  renderCart();
-}
-
-let cart = {};
+let cart = JSON.parse(localStorage.getItem("cart") || "{}");
 
 function addToCart(productId) {
   if (cart[productId]) {
@@ -18,6 +6,7 @@ function addToCart(productId) {
   } else {
     cart[productId] = { ...products[productId], quantity: 1 };
   }
+  localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
 }
 
@@ -27,6 +16,7 @@ function removeFromCart(productId) {
   if (cart[productId].quantity <= 0) {
     delete cart[productId];
   }
+  localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
 }
 
@@ -40,8 +30,9 @@ function renderCart() {
   let total = 0;
   let itemCount = 0;
 
-  for (const productId in cart) {
-    const item = cart[productId];
+  const cartItems = Object.values(cart); // This is the key fix
+
+  cartItems.forEach(item => {
     total += item.price * item.quantity;
     itemCount += item.quantity;
 
@@ -57,15 +48,10 @@ function renderCart() {
       li.appendChild(removeBtn);
       cartItemsContainer.appendChild(li);
     }
-  }
+  });
 
   if (cartTotalElem) cartTotalElem.textContent = total.toFixed(2);
   if (cartCountElem) cartCountElem.textContent = itemCount;
 }
 
 document.addEventListener("DOMContentLoaded", renderCart);
-emailjs.send("default_service", "template_afa89jk", {
-  from_name: document.getElementById("name").value,
-  reply_to: document.getElementById("email").value,
-  message: document.getElementById("message").value,
-});
