@@ -13,11 +13,28 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="products.html" class="active">Shop</a>
-<a href="checkout.html">
-  <img src="https://cdn-icons-png.flaticon.com/512/126/126510.png" alt="Cart" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;">
-  Checkout
+
+  
 </a>
     </nav>
+    <a href="cart.html" id="cart-icon" style="position:relative; display:inline-block; text-decoration:none; color:#000;">
+  🛒Cart
+  <span id="cart-count" style="
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    ">
+    0
+  </span>
+</a>
 
   </header>
 
@@ -264,10 +281,10 @@
   <img src="images/maggi.jpg" alt="Maggi Season-Up! All Purpose 430 g Pack of 1" />
   <h3>Maggi Season-Up! All Purpose 430 g Pack of 1
 </h3>
-  <p class="price">$18.00</p>
+  <p class="price">$7.20</p>
   <label>Qty: </label>
     <input type="number" min="1" value="1" class="qty"></label>
-        <button onclick="addToCart('Maggi Season-Up! All Purpose 430 g Pack of 1', 18.00, this)">Add to Cart</button>
+        <button onclick="addToCart('Maggi Season-Up! All Purpose 430 g Pack of 1', 18.40, this)">Add to Cart</button>
 </div>
 
 <div class="product" data-category="batch4">
@@ -283,7 +300,7 @@
 
 <div class="product" data-category="batch4">
   <img src="images/curry.jpg" alt="Grace Jamaican Curry Powder 110g 2pck" />
-  <h3>Grace Jamaican Curry Powder 110g 2pack</h3>
+  <h3>Grace Jamaican Curry Powder 110g 2pck</h3>
   <p class="price">$14.50</p>
   <label>Qty: </label>
     <input type="number" min="1" value="1" class="qty"></label>
@@ -344,7 +361,7 @@
   <p class="price">$13.95</p> <!-- 10% off -->
   <label>Quantity: </label>
     <input type="number" min="1" value="1" class="qty"></label>
-        <button onclick="addToCart('jroyal_rubbing_alcohol_ 475ml', 13.95, this)">Add to Cart</button>
+        <button onclick="addToCart('jroyal_rubbing_alcohol_ 475ML', 13.95, this)">Add to Cart</button>
 </div>
 
 <div class="product" data-category="Food">
@@ -444,8 +461,8 @@
 
 <div class="product" data-category="Food">
   <img src="images/malta.jpg" alt="Jamaican D&G Malta 6pack 300g" />
-  <h3>Jamaican D&G Malta 300g 6pack</h3>
-  <p class="price">$30.00</p> <!-- no discount for juice -->
+  <h3>Jamaican D&G Malta 300g</h3>
+  <p class="price">$30.00 6pack</p> <!-- no discount for juice -->
   <label>Quantity: </label>
     <input type="number" min="1" value="1" class="qty"></label>
         <button onclick="addToCart('Jamaican Malta 6 Pack', 30.00, this)">Add to Cart</button>
@@ -549,7 +566,7 @@
 
 <div class="product" data-category="Snacks">
   <img src="images/saus.jpg" alt="Grace Sausage 6pck" />
-  <h3>Grace Sausage 6 pack</h3>
+  <h3>Grace Sausage 6p</h3>
   <p class="price">$24.30</p> <!-- 10% off from $4.00 -->
   <label>Quantity: </label>
     <input type="number" min="1" value="1" class="qty"></label>
@@ -584,51 +601,60 @@
       <a href="policy.html" style="color: #fff; text-decoration: underline;">Store Policy</a>
     </p>
   </footer>
-
   <script>
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    function addToCart(name, price, button) {
-      const qtyInput = button.previousElementSibling;
-      const quantity = parseInt(qtyInput.value);
-      const existing = cart.find(item => item.name === name);
-      if (existing) {
-        existing.quantity += quantity;
-      } else {
-        cart.push({ name, price, quantity });
-      }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${quantity} x ${name} added to cart!`);
-      updateCart();
+  function addToCart(name, price, button) {
+    const qtyInput = button.previousElementSibling;
+    const quantity = parseInt(qtyInput.value);
+    if (!quantity || quantity <= 0) return alert("Enter a valid quantity");
+
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.quantity += quantity;
+    } else {
+      cart.push({ name, price, quantity });
     }
 
-    function updateCart() {
-      document.getElementById("shippingInput")?.addEventListener("input", () => {
-  const shipping = parseFloat(document.getElementById("shippingInput").value) || 0;
-  localStorage.setItem("shipping", shipping.toFixed(2));
-  updateCart();
-});
-
-
-      let total = 0;
-      cartItems.innerHTML = "";
-
-      cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
-        const div = document.createElement("div");
-        div.textContent = `${item.quantity} x ${item.name} = $${subtotal.toFixed(2)}`;
-        cartItems.appendChild(div);
-      });
-
-      const shipping = parseFloat(shippingInput.value) || 0;
-      shippingEl.textContent = shipping.toFixed(2);
-      totalEl.textContent = (total + shipping).toFixed(2);
-    }
-
-    document.getElementById("shippingInput")?.addEventListener("input", updateCart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${quantity} x ${name} added to cart!`);
     updateCart();
-  </script>
-</body>
-</html>
+  }
+
+  function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const shippingInput = document.getElementById("shippingInput");
+    const shippingEl = document.getElementById("shipping");
+    const totalEl = document.getElementById("total");
+
+    let total = 0;
+    cartItems.innerHTML = "";
+
+    cart.forEach(item => {
+      const subtotal = item.price * item.quantity;
+      total += subtotal;
+
+      const div = document.createElement("div");
+      div.textContent = `${item.quantity} x ${item.name} = $${subtotal.toFixed(2)}`;
+      cartItems.appendChild(div);
+    });
+
+    const shipping = parseFloat(shippingInput.value) || 0;
+    shippingEl.textContent = shipping.toFixed(2);
+    totalEl.textContent = (total + shipping).toFixed(2);
+
+    // update cart count icon
+    const cartCount = document.getElementById("cart-count");
+    if (cartCount) {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = count;
+    }
+  }
+
+  // Set up once on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("shippingInput").addEventListener("input", updateCart);
+    updateCart();
+  });
+</script>
 
